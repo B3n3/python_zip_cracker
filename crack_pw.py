@@ -2,10 +2,16 @@ import sys
 import zipfile
 import itertools
 
+filename = ""
+try:
+	filename = sys.argv[1];
+except:
+	print "The filename was not a valid string"
+	exit(1)
+
 #characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 characters = "abcdefghijklmnopqrstuvwxyz"
-#hardcoded filename - will be changed soon
-zipFile = zipfile.ZipFile("fff.zip", "r")
+zipFile = zipfile.ZipFile(filename, "r")
 
 #iterate all possible lengths of the password
 for leng in range(1, len(characters)+1):
@@ -34,6 +40,8 @@ for leng in range(1, len(characters)+1):
 			except RuntimeError:
 				pass
 			except zipfile.BadZipfile:
+				pass
+			except Exception as e:
 				pass
 
 print "no pw found..."
